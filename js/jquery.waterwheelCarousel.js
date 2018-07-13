@@ -476,6 +476,24 @@
     }
 
     /**
+     * Function hide all items
+     */
+    function clearCarousel(){
+        var items = data.itemsContainer.find('img');
+        for (var i = 0; i < data.totalItems; i++) {
+            $(items[i]).css({
+                "visibility": "hidden",
+                "z-index": "0",
+                "opacity": "0",
+                "left": "0px",
+                "top": "0px",
+                "width": "0px",
+                "height": "0px",
+            });
+        }
+    }
+
+    /**
      * The event handler when an image within the carousel is clicked
      * This function will rotate the carousel the correct number of rotations
      * to get the clicked item to the center, or will fire the custom event
@@ -633,6 +651,12 @@
       options.autoPlay = 0;
 
       moveOnce('backward');
+    }
+
+    this.destroy = function () {
+        autoPlay(false);
+        options.autoPlay = 0;
+        clearCarousel();
     }
 
     this.reload(startingOptions);
